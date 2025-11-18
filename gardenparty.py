@@ -125,20 +125,20 @@ st.markdown("""
         aspect-ratio: 1;
         font-size: 2rem;
         border-radius: 10px;
-        border: 2px solid #e0e0e0;
-        background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        border: 2px solid #555;
+        background: #2c3e50;
         transition: all 0.2s;
     }
     
     div[data-testid="column"] > div > div > button:hover {
         transform: scale(1.05);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        background: linear-gradient(135deg, #fff9e6 0%, #ffe0a3 100%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        background: #34495e;
     }
     
     /* Disabled/filled cell styling */
     div[data-testid="column"] > div > div > button:disabled {
-        background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        background: #2c3e50;
         opacity: 1;
     }
     
