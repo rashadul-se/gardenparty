@@ -155,7 +155,7 @@ st.markdown("""
     }
     
     div[data-testid="column"] > div > div > button:disabled {
-        background: #1a1a1a !important;
+        background: #ffd500 !important;
         opacity: 1 !important;
     }
     
