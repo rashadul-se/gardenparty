@@ -284,7 +284,6 @@ def init_db():
                 c.execute("ALTER TABLE game_stats ADD COLUMN ai_bid INTEGER DEFAULT 0")
             except sqlite3.OperationalError:
                 pass
-            try
 
 def get_player_wallet():
     """Get player's current wallet balance"""
