@@ -258,6 +258,7 @@ def init_db():
     with db_pool.get_connection() as conn:
         c = conn.cursor()
         
+        # Create or update game_stats table
         c.execute('''
             CREATE TABLE IF NOT EXISTS game_stats (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -271,7 +272,7 @@ def init_db():
             )
         ''')
         
-        # Migrate existing table to add auction columns
+        # Migrate existing table to add auction columns if they don't exist
         try:
             c.execute("SELECT player_bid FROM game_stats LIMIT 1")
         except sqlite3.OperationalError:
@@ -280,10 +281,38 @@ def init_db():
                 c.execute("ALTER TABLE game_stats ADD COLUMN player_bid INTEGER DEFAULT 0")
             except sqlite3.OperationalError:
                 pass
+        
+        try:
+            c.execute("SELECT ai_bid FROM game_stats LIMIT 1")
+        except sqlite3.OperationalError:
             try:
                 c.execute("ALTER TABLE game_stats ADD COLUMN ai_bid INTEGER DEFAULT 0")
             except sqlite3.OperationalError:
                 pass
+        
+        try:
+            c.execute("SELECT bee_bid FROM game_stats LIMIT 1")
+        except sqlite3.OperationalError:
+            try:
+                c.execute("ALTER TABLE game_stats ADD COLUMN bee_bid INTEGER DEFAULT 0")
+            except sqlite3.OperationalError:
+                pass
+        
+        # Create player_wallet table
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS player_wallet (
+                id INTEGER PRIMARY KEY,
+                coins INTEGER NOT NULL,
+                total_wagered INTEGER DEFAULT 0,
+                total_won INTEGER DEFAULT 0,
+                games_played INTEGER DEFAULT 0
+            )
+        ''')
+        
+        # Initialize player wallet if not exists
+        c.execute('INSERT OR IGNORE INTO player_wallet (id, coins) VALUES (1, ?)', (STARTING_COINS,))
+        
+        conn.commit()
 
 def get_player_wallet():
     """Get player's current wallet balance"""
