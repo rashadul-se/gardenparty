@@ -118,6 +118,7 @@ st.markdown("""
         box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
     
+    
     /* Cell button styling */
     div[data-testid="column"] > div > div > button {
         width: 100%;
@@ -125,13 +126,20 @@ st.markdown("""
         font-size: 2rem;
         border-radius: 10px;
         border: 2px solid #e0e0e0;
-        background: white;
+        background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
         transition: all 0.2s;
     }
     
     div[data-testid="column"] > div > div > button:hover {
         transform: scale(1.05);
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe0a3 100%);
+    }
+    
+    /* Disabled/filled cell styling */
+    div[data-testid="column"] > div > div > button:disabled {
+        background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        opacity: 1;
     }
     
     /* Winner animation */
